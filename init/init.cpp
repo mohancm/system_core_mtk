@@ -83,7 +83,7 @@ static char qemu[32];
 std::string default_console = "/dev/console";
 static time_t process_needs_restart_at;
 
-const char *ENV[32];
+const char *ENV[64];
 
 static int epoll_fd = -1;
 
@@ -537,7 +537,7 @@ static void selinux_init_all_handles(void)
     selinux_android_set_sehandle(sehandle);
     sehandle_prop = selinux_android_prop_context_handle();
 }
-
+#if 0
 enum selinux_enforcing_status { SELINUX_PERMISSIVE, SELINUX_ENFORCING };
 
 static selinux_enforcing_status selinux_status_from_cmdline() {
@@ -551,11 +551,11 @@ static selinux_enforcing_status selinux_status_from_cmdline() {
 
     return status;
 }
-
+#endif
 static bool selinux_is_enforcing(void)
 {
     if (ALLOW_PERMISSIVE_SELINUX) {
-        return selinux_status_from_cmdline() == SELINUX_ENFORCING;
+        return false;  // selinux_status_from_cmdline() == SELINUX_ENFORCING;
     }
     return true;
 }

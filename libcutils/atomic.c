@@ -1,3 +1,9 @@
+/* 
+ Author: Mister Oyster <oysterized@gmail.com>
+ Subject: [PATCH] mtk: O: reintroduce atomic symbols in libcutils for old Mtk
+ audio hals & Mali blobs
+*/
+
 /*
  * Copyright (C) 2007 The Android Open Source Project
  *
@@ -14,24 +20,13 @@
  * limitations under the License.
  */
 
-#ifndef _INIT_INIT_H
-#define _INIT_INIT_H
+/*
+ * Generate non-inlined versions of android_atomic functions.
+ * Nobody should be using these, but some binary blobs currently (late 2014)
+ * are.
+ * If you read this in 2015 or later, please try to delete this file.
+ */
 
-#include <string>
+#define ANDROID_ATOMIC_INLINE
 
-extern const char *ENV[64];
-extern std::string default_console;
-extern struct selabel_handle *sehandle;
-extern struct selabel_handle *sehandle_prop;
-
-void handle_control_message(const std::string& msg, const std::string& arg);
-
-void property_changed(const std::string& name, const std::string& value);
-
-void register_epoll_handler(int fd, void (*fn)());
-
-int add_environment(const char* key, const char* val);
-
-bool start_waiting_for_property(const char *name, const char *value);
-
-#endif  /* _INIT_INIT_H */
+#include <cutils/atomic.h>

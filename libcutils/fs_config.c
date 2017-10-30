@@ -192,8 +192,8 @@ static const struct fs_path_config android_files[] = {
                                               "system/bin/run-as" },
 
     /* Support FIFO scheduling mode in SurfaceFlinger. */
-    { 00755, AID_SYSTEM,    AID_GRAPHICS,  CAP_MASK_LONG(CAP_SYS_NICE),
-                                              "system/bin/surfaceflinger" },
+    /* Disabled for now as this caused LD_PRELOAD and LD_SHIM_LIBS to be sanitized in linker */
+    //{ 00755, AID_SYSTEM,    AID_GRAPHICS,     CAP_MASK_LONG(CAP_SYS_NICE), "system/bin/surfaceflinger" },
 
     /* Support hostapd administering a network interface. */
     { 00755, AID_WIFI,      AID_WIFI,      CAP_MASK_LONG(CAP_NET_ADMIN) |
